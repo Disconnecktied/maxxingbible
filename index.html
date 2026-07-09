@@ -685,7 +685,7 @@ window.RMX_CFG = {
 
   /* --- The optional community coin --- */
   COIN: {
-    NAME: "$RETARD",          // display name — rename to whatever you launch
+    NAME: "$MaxxingBible",          // display name — rename to whatever you launch
     CONTRACT: "",             // paste the Solana mint address AFTER you deploy it. Empty = "coming soon"
     BUY_URL: "",              // optional custom buy link; if empty it's auto-built from CONTRACT (pump.fun / Jupiter)
     CHART_URL: ""             // optional custom chart link; if empty it's auto-built from CONTRACT (DexScreener)
@@ -870,7 +870,7 @@ window.RMX_CFG = {
   var CFG = window.RMX_CFG || {};
   var COIN = CFG.COIN || {};
   (function initCoin() {
-    document.getElementById("coinName").textContent = COIN.NAME || "$RETARD";
+    document.getElementById("coinName").textContent = COIN.NAME || "$MaxxingBible";
     var ca = (COIN.CONTRACT || "").trim();
     var actions = document.getElementById("buyActions");
     var caEl = document.getElementById("coinCa");
