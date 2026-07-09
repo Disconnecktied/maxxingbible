@@ -1,0 +1,30 @@
+<!--
+  BRANDED WELCOME / MAGIC-LINK EMAIL
+  Paste the markup below into: Supabase → Authentication → Email Templates → "Magic Link".
+  Keep the {{ .ConfirmationURL }} token exactly as-is — Supabase fills it in.
+  (This same template is what a new member gets automatically the moment they sign up.)
+-->
+<div style="background:#0a0a0a;padding:40px 0;font-family:Menlo,Consolas,monospace;">
+  <div style="max-width:480px;margin:0 auto;background:#121110;border:1px solid #2b2620;padding:36px 30px;">
+    <div style="color:#ff3c00;letter-spacing:.3em;font-size:11px;text-transform:uppercase;">Brother, we need to talk.</div>
+    <h1 style="color:#ffb000;font-size:26px;margin:14px 0 6px;line-height:1.1;">🔥 The RetardMaxxing Bible</h1>
+    <p style="color:#9a917f;font-size:14px;line-height:1.6;margin:0 0 26px;">
+      You said you were done overthinking. Good. This is the whole sign-in —
+      one click, no password, zero rumination.
+    </p>
+    <a href="{{ .ConfirmationURL }}"
+       style="display:inline-block;background:#ff6a00;color:#000;font-weight:700;text-decoration:none;
+              padding:14px 28px;letter-spacing:.1em;text-transform:uppercase;font-size:13px;">
+      Enter The Congregation →
+    </a>
+    <p style="color:#9a917f;font-size:12px;line-height:1.6;margin:28px 0 0;">
+      If the button doesn't work, paste this into your browser:<br>
+      <span style="color:#ffb000;word-break:break-all;">{{ .ConfirmationURL }}</span>
+    </p>
+    <p style="color:#5f594e;font-size:11px;line-height:1.6;margin:24px 0 0;border-top:1px solid #2b2620;padding-top:16px;">
+      Didn't ask for this? Someone typed your email by mistake — ignore it and nothing happens.
+      We never sent you a password because there isn't one.
+    </p>
+    <div style="color:#5f594e;font-size:14px;letter-spacing:.4em;margin-top:22px;">🔥 🚬 🔥</div>
+  </div>
+</div>

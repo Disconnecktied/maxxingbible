@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="12" fill="#0a0a0a"/>
+  <!-- flame -->
+  <path d="M32 8c4 8-3 11-3 17 0 4 3 7 3 7s-6-1-8-6c-3 5-1 10 1 13 3 4 8 6 8 6s8-2 10-8c3-8-3-14-6-18 1 4-1 7-3 8 2-6-3-11-9-19z"
+        fill="url(#g)"/>
+  <!-- cigar -->
+  <rect x="14" y="44" width="30" height="7" rx="3.5" fill="#7a5230"/>
+  <rect x="40" y="44" width="6" height="7" rx="2" fill="#e8b04b"/>
+  <circle cx="15" cy="47.5" r="2.4" fill="#ff3c00"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0.2" stop-color="#ffb000"/>
+      <stop offset="0.7" stop-color="#ff6a00"/>
+      <stop offset="1" stop-color="#ff3c00"/>
+    </linearGradient>
+  </defs>
+</svg>

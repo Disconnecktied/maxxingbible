@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The RetardMaxxing Bible — Trust Your Gut</title>
+<meta name="description" content="The scripture of RetardMaxxing: zero rumination, zero regrets. Read the Gospel, take the Test, and join the Congregation — a free community for people who are done overthinking.">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #121110;
+    --panel: #171512;
+    --amber: #ffb000;
+    --orange: #ff6a00;
+    --ember: #ff3c00;
+    --text: #e8e2d6;
+    --dim: #9a917f;
+    --line: #2b2620;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--orange); color: #000; }
+
+  a { color: var(--amber); text-decoration: none; }
+  a:hover { color: var(--orange); }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,10,10,.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 24px; gap: 12px;
+  }
+  nav .logo { font-weight: 700; color: var(--amber); letter-spacing: .06em; white-space: nowrap; }
+  nav .links { display: flex; gap: 18px; font-size: .8rem; flex-wrap: wrap; justify-content: flex-end; align-items: center; }
+  nav .links a { color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
+  nav .links a:hover { color: var(--amber); }
+  nav .auth-slot { display: flex; align-items: center; gap: 12px; }
+  .nav-btn {
+    padding: 8px 16px; border: 1px solid var(--orange); color: var(--amber);
+    background: transparent; cursor: pointer; font-family: var(--mono);
+    text-transform: uppercase; letter-spacing: .1em; font-size: .72rem; transition: all .15s;
+  }
+  .nav-btn:hover { background: var(--orange); color: #000; }
+  .nav-handle { color: var(--amber); font-size: .78rem; white-space: nowrap; }
+  .nav-handle .dim { color: var(--dim); }
+
+  /* ---------- HERO ---------- */
+  header {
+    min-height: 88vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 80px 24px 60px;
+    position: relative;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 110%, rgba(255,60,0,.22), transparent 70%),
+      radial-gradient(ellipse 40% 30% at 50% 115%, rgba(255,176,0,.18), transparent 70%),
+      var(--bg);
+  }
+  .kicker {
+    color: var(--ember); text-transform: uppercase;
+    letter-spacing: .35em; font-size: .75rem; margin-bottom: 20px;
+  }
+  h1 {
+    font-size: clamp(2.6rem, 9vw, 6rem);
+    line-height: .95; letter-spacing: -.02em; font-weight: 800;
+    background: linear-gradient(180deg, var(--amber) 20%, var(--orange) 70%, var(--ember));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    text-shadow: 0 0 60px rgba(255,106,0,.25);
+  }
+  .tagline {
+    margin-top: 26px; font-size: clamp(1rem, 2.6vw, 1.35rem);
+    color: var(--text); max-width: 620px;
+  }
+  .tagline em { color: var(--amber); font-style: normal; }
+  .hero-sub { margin-top: 14px; color: var(--dim); font-size: .85rem; }
+  .hero-cta { margin-top: 42px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .btn {
+    display: inline-block; padding: 14px 26px;
+    border: 1px solid var(--orange); color: var(--amber);
+    text-transform: uppercase; letter-spacing: .12em; font-size: .8rem;
+    font-family: var(--mono); background: transparent; cursor: pointer;
+    transition: all .15s ease;
+  }
+  .btn:hover { background: var(--orange); color: #000; box-shadow: 0 0 30px rgba(255,106,0,.4); }
+  .btn.solid { background: var(--orange); color: #000; font-weight: 700; }
+  .btn.solid:hover { background: var(--amber); border-color: var(--amber); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 90px 0; border-top: 1px solid var(--line); }
+  .sec-label {
+    color: var(--ember); text-transform: uppercase;
+    letter-spacing: .3em; font-size: .7rem; margin-bottom: 14px;
+  }
+  h2 {
+    font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+    color: var(--amber); letter-spacing: -.01em; margin-bottom: 34px; line-height: 1.15;
+  }
+  h2 .num { color: var(--ember); }
+  p + p { margin-top: 1.2em; }
+  .lead { font-size: 1.05rem; }
+  .dim { color: var(--dim); }
+
+  /* ---------- GOSPEL ---------- */
+  #gospel p strong { color: var(--amber); }
+  blockquote.big {
+    margin: 40px 0; padding: 24px 28px;
+    border-left: 3px solid var(--orange);
+    background: var(--panel);
+    font-size: 1.15rem; color: var(--amber);
+  }
+  blockquote.big footer { font-size: .8rem; color: var(--dim); margin-top: 10px; }
+
+  /* ---------- COMMANDMENTS ---------- */
+  ol.commandments { list-style: none; counter-reset: cmd; }
+  ol.commandments li {
+    counter-increment: cmd;
+    padding: 22px 0 22px 74px; position: relative;
+    border-bottom: 1px dashed var(--line);
+  }
+  ol.commandments li::before {
+    content: counter(cmd, upper-roman);
+    position: absolute; left: 0; top: 20px;
+    color: var(--ember); font-weight: 800; font-size: 1.3rem;
+    width: 56px; text-align: right;
+  }
+  ol.commandments li b { color: var(--amber); display: block; margin-bottom: 4px; }
+  ol.commandments li span { color: var(--dim); font-size: .92rem; }
+
+  /* ---------- SAINTS ---------- */
+  .saints { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .saint {
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 28px 24px; display: flex; flex-direction: column; gap: 12px;
+    transition: border-color .15s;
+  }
+  .saint:hover { border-color: var(--orange); }
+  .saint .halo { font-size: 2rem; }
+  .saint h3 { color: var(--amber); font-size: 1.05rem; }
+  .saint .title { color: var(--ember); font-size: .72rem; text-transform: uppercase; letter-spacing: .18em; }
+  .saint blockquote { color: var(--text); font-size: .92rem; border-left: 2px solid var(--orange); padding-left: 12px; }
+  .saint .bio { color: var(--dim); font-size: .82rem; }
+
+  /* ---------- QUIZ ---------- */
+  #quiz-box {
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 34px 30px; margin-top: 10px;
+  }
+  .q-progress { color: var(--ember); font-size: .75rem; text-transform: uppercase; letter-spacing: .2em; margin-bottom: 16px; }
+  .q-text { font-size: 1.1rem; color: var(--text); margin-bottom: 22px; }
+  .q-opts { display: flex; flex-direction: column; gap: 12px; }
+  .q-opt {
+    text-align: left; padding: 14px 18px;
+    background: var(--bg2); border: 1px solid var(--line);
+    color: var(--text); font-family: var(--mono); font-size: .92rem;
+    cursor: pointer; transition: all .12s;
+  }
+  .q-opt:hover { border-color: var(--amber); color: var(--amber); transform: translateX(4px); }
+  .verdict-label { font-size: .75rem; text-transform: uppercase; letter-spacing: .25em; color: var(--ember); }
+  .verdict-title { font-size: clamp(1.4rem, 4vw, 2rem); color: var(--amber); margin: 12px 0 18px; }
+  .verdict-body { color: var(--text); }
+  .quiz-restart { margin-top: 26px; }
+
+  /* ---------- AFFIRMATION ---------- */
+  #affirm-box {
+    background:
+      radial-gradient(ellipse 80% 100% at 50% 130%, rgba(255,60,0,.15), transparent),
+      var(--panel);
+    border: 1px solid var(--line);
+    padding: 50px 30px; text-align: center;
+  }
+  #affirm-text {
+    font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--amber);
+    min-height: 3.2em; display: flex; align-items: center; justify-content: center;
+    max-width: 640px; margin: 0 auto 30px;
+  }
+
+  /* ---------- CONGREGATION (community) ---------- */
+  #congregation .cong-intro { color: var(--dim); margin-bottom: 26px; max-width: 640px; }
+  .cong-gate, .cong-composer {
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 24px 22px; margin-bottom: 26px;
+  }
+  .cong-gate { text-align: center; }
+  .cong-gate p { color: var(--dim); margin-bottom: 18px; }
+  .cong-composer textarea {
+    width: 100%; min-height: 90px; resize: vertical;
+    background: var(--bg2); border: 1px solid var(--line); color: var(--text);
+    font-family: var(--mono); font-size: .95rem; padding: 14px; line-height: 1.5;
+  }
+  .cong-composer textarea:focus { outline: none; border-color: var(--orange); }
+  .cong-composer .row { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; gap: 12px; flex-wrap: wrap; }
+  .cong-composer .count { color: var(--dim); font-size: .75rem; }
+  .feed { display: flex; flex-direction: column; gap: 14px; }
+  .post {
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 18px 20px;
+  }
+  .post .meta { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .post .who { color: var(--amber); font-size: .85rem; font-weight: 700; }
+  .post .when { color: var(--dim); font-size: .72rem; }
+  .post .body { color: var(--text); font-size: .95rem; white-space: pre-wrap; word-break: break-word; }
+  .post .actions { margin-top: 12px; display: flex; gap: 16px; align-items: center; }
+  .like-btn {
+    background: none; border: none; color: var(--dim); cursor: pointer;
+    font-family: var(--mono); font-size: .8rem; display: flex; align-items: center; gap: 6px;
+    transition: color .12s;
+  }
+  .like-btn:hover { color: var(--orange); }
+  .like-btn.liked { color: var(--ember); }
+  .feed-empty { color: var(--dim); text-align: center; padding: 30px 0; font-size: .9rem; }
+
+  /* ---------- BUY WIDGET ---------- */
+  #buy .buy-card {
+    background:
+      radial-gradient(ellipse 70% 100% at 50% -10%, rgba(255,106,0,.12), transparent),
+      var(--panel);
+    border: 1px solid var(--line); padding: 34px 30px; text-align: center;
+  }
+  .buy-coin { font-size: 1.6rem; color: var(--amber); font-weight: 800; letter-spacing: .04em; }
+  .buy-ca {
+    margin: 16px auto; max-width: 560px; word-break: break-all;
+    background: var(--bg2); border: 1px solid var(--line); padding: 10px 14px;
+    color: var(--dim); font-size: .78rem; display: flex; align-items: center; gap: 10px; justify-content: center; flex-wrap: wrap;
+  }
+  .buy-ca code { color: var(--amber); }
+  .buy-actions { margin-top: 22px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .buy-disclaimer {
+    margin-top: 24px; color: var(--dim); font-size: .72rem; line-height: 1.6;
+    max-width: 620px; margin-left: auto; margin-right: auto;
+    border-top: 1px dashed var(--line); padding-top: 18px;
+  }
+  .buy-disclaimer strong { color: var(--ember); }
+
+  /* ---------- FAQ ---------- */
+  details {
+    border: 1px solid var(--line); background: var(--panel);
+    margin-bottom: 12px;
+  }
+  details summary {
+    padding: 18px 22px; cursor: pointer; color: var(--amber);
+    list-style: none; position: relative; padding-right: 48px;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after {
+    content: "+"; position: absolute; right: 20px; top: 50%;
+    transform: translateY(-50%); color: var(--ember); font-size: 1.2rem;
+  }
+  details[open] summary::after { content: "–"; }
+  details .a { padding: 0 22px 20px; color: var(--dim); font-size: .92rem; }
+  details .a p + p { margin-top: .8em; }
+
+  /* ---------- FOOTER ---------- */
+  footer.site {
+    border-top: 1px solid var(--line);
+    padding: 40px 24px; text-align: center;
+    color: var(--dim); font-size: .75rem;
+  }
+  footer.site .fire { letter-spacing: .5em; margin-bottom: 14px; }
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,.78); backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--bg2); border: 1px solid var(--orange);
+    max-width: 440px; width: 100%; padding: 34px 30px; position: relative;
+    box-shadow: 0 0 60px rgba(255,106,0,.15);
+  }
+  .modal h3 { color: var(--amber); font-size: 1.4rem; margin-bottom: 8px; }
+  .modal .sub { color: var(--dim); font-size: .85rem; margin-bottom: 24px; }
+  .modal label { display: block; color: var(--dim); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 8px; }
+  .modal input {
+    width: 100%; background: var(--panel); border: 1px solid var(--line); color: var(--text);
+    font-family: var(--mono); font-size: .95rem; padding: 13px 14px; margin-bottom: 18px;
+  }
+  .modal input:focus { outline: none; border-color: var(--orange); }
+  .modal .btn { width: 100%; text-align: center; }
+  .modal .close {
+    position: absolute; top: 14px; right: 18px; background: none; border: none;
+    color: var(--dim); font-size: 1.4rem; cursor: pointer; line-height: 1;
+  }
+  .modal .close:hover { color: var(--amber); }
+  .modal .msg { font-size: .82rem; margin-top: 16px; min-height: 1.2em; }
+  .modal .msg.ok { color: var(--amber); }
+  .modal .msg.err { color: var(--ember); }
+  .modal .divider { text-align: center; color: var(--dim); font-size: .72rem; margin: 18px 0; letter-spacing: .1em; }
+  .modal .phone-block { display: none; }
+  .modal .phone-block.show { display: block; }
+  .modal .fineprint { color: var(--dim); font-size: .68rem; margin-top: 20px; line-height: 1.6; }
+
+  @media (max-width: 560px) {
+    nav .links { display: none; }
+    nav .auth-slot { margin-left: auto; }
+    section { padding: 64px 0; }
+    ol.commandments li { padding-left: 56px; }
+    ol.commandments li::before { width: 40px; font-size: 1.05rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">🔥 RETARDMAXXING</div>
+    <div class="links">
+      <a href="#gospel">Gospel</a>
+      <a href="#commandments">Commandments</a>
+      <a href="#test">The Test</a>
+      <a href="#congregation">Congregation</a>
+      <a href="#buy">Coin</a>
+      <a href="#faq">FAQ</a>
+      <div class="auth-slot" id="authSlot">
+        <button class="nav-btn" id="navSignIn" type="button">Sign In</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="kicker">Brother, we need to talk.</div>
+  <h1>THE RETARDMAXXING<br>BIBLE</h1>
+  <p class="tagline">Trust your gut: <em>if it feels wrong, it is.</em><br>Zero rumination. Zero regrets.</p>
+  <p class="hero-sub">The scripture of 2026's most gloriously unpolished philosophy — plus a free congregation of people who are done overthinking.</p>
+  <div class="hero-cta">
+    <a class="btn solid" href="#congregation">Join Free</a>
+    <a class="btn" href="#test">Take The Test</a>
+  </div>
+</header>
+
+<!-- ================= GOSPEL ================= -->
+<section id="gospel">
+  <div class="wrap">
+    <div class="sec-label">Book I</div>
+    <h2>The Gospel <span class="num">//</span> What Is RetardMaxxing?</h2>
+    <p class="lead">Somewhere along the way, you got smart. Too smart. You read the books, listened to the podcasts, built the second brain, optimized the morning routine — and somehow you're doing <strong>less than ever</strong>. You've got seventeen tabs open about how to start and zero things started. That's the disease. RetardMaxxing is the cure.</p>
+    <p>It started in a backyard. A middle-aged guy named <strong>Elisha Long</strong>, sitting in a lawn chair with a cigar and a grill going, talking straight into a camera for forty minutes at a stretch. No jump cuts. No ring light. No "smash that like button." Just a grown man telling you what your high school buddy would tell you if he loved you enough to be honest: you already know the answer. You knew it before you opened the spreadsheet. <strong>Trust your gut — if it feels wrong, it is.</strong> Now go do the thing.</p>
+    <p>Then it escaped the backyard. Marc Andreessen tweeted two words — <strong>"Current status: Retardmaxxing"</strong> — and called Long his new life coach. Jason Calacanis ran a thousand-post thread preaching zero rumination. The All-In pod chewed on it for an hour. Suddenly the most over-credentialed people in America were admitting what the guy with the cigar knew all along: the analysis was the procrastination. The optimization was the avoidance. The gut was right the whole time.</p>
+    <p>RetardMaxxing is not about being dumb. It's about refusing to let your galaxy brain talk you out of your life. Throw shit at the wall. See what sticks. Be unapologetically, radically yourself — the unpolished version, the one that says the thing and ships the thing and apologizes to nobody. The world belongs to people who <strong>move</strong>.</p>
+    <blockquote class="big">
+      "Throw shit at the wall and see what sticks."
+      <footer>— Elisha Long, The Prophet, from the lawn chair</footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ================= COMMANDMENTS ================= -->
+<section id="commandments">
+  <div class="wrap">
+    <div class="sec-label">Book II</div>
+    <h2>The 10 Commandments</h2>
+    <ol class="commandments">
+      <li><b>Thou shalt not ruminate.</b><span>You've thought about it enough. You thought about it in the shower. You're done thinking. Go.</span></li>
+      <li><b>Thou shalt trust thy gut.</b><span>If it feels wrong, it is. Your gut ran the numbers before your brain opened Excel.</span></li>
+      <li><b>Thou shalt ship it ugly.</b><span>Version one is supposed to embarrass you. If it doesn't, you shipped too late.</span></li>
+      <li><b>Thou shalt throw shit at the wall.</b><span>The wall will tell you what sticks. The whiteboard never will.</span></li>
+      <li><b>Thou shalt not build a second brain before using the first one.</b><span>Your notes app is a graveyard. Delete the system, keep the action.</span></li>
+      <li><b>Thou shalt say the thing.</b><span>At the meeting. To her. To him. To your boss. The polished version you're rehearsing is worse.</span></li>
+      <li><b>Thou shalt not wait for permission.</b><span>Nobody's coming. That's the good news — it means it's all yours.</span></li>
+      <li><b>Thou shalt keep zero regrets.</b><span>You're allowed to be wrong. You're not allowed to wish you'd tried. Wrong is a lesson; waiting is a loss.</span></li>
+      <li><b>Thou shalt be unapologetically thyself.</b><span>The unpolished you is the one people actually trust. Retire the brand. Bring the guy.</span></li>
+      <li><b>Thou shalt light the cigar.</b><span>Metaphorically or otherwise. Sit down, slow down, and stop pretending life is an optimization problem. It's a grill and a lawn chair.</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= SAINTS ================= -->
+<section id="saints">
+  <div class="wrap">
+    <div class="sec-label">Book III</div>
+    <h2>The Saints</h2>
+    <div class="saints">
+      <div class="saint">
+        <div class="halo">🚬</div>
+        <div class="title">The Prophet</div>
+        <h3>Elisha Long</h3>
+        <blockquote>"Brother, we need to talk."</blockquote>
+        <p class="bio">The founder. A middle-aged YouTuber with a cigar, a grill, and a lawn chair. Part Hank Hill, part Archie Bunker. No script, no polish, 30–40 minutes of common sense at a time. Built retardmaxx.com and accidentally built a movement.</p>
+      </div>
+      <div class="saint">
+        <div class="halo">📈</div>
+        <div class="title">The Convert</div>
+        <h3>Marc Andreessen</h3>
+        <blockquote>"Current status: Retardmaxxing"</blockquote>
+        <p class="bio">Runs a $90B venture firm. Read every book ever written, then found the answer in a backyard. Tweeted his conversion in March 2026 and named Long his new life coach. When the most-online man in tech logs off to trust his gut, you pay attention.</p>
+      </div>
+      <div class="saint">
+        <div class="halo">📣</div>
+        <div class="title">The Evangelist</div>
+        <h3>Jason Calacanis</h3>
+        <blockquote>"Zero rumination, zero regrets."</blockquote>
+        <p class="bio">Took the gospel to the feed in June 2026 — a thread that grew past 1,325 posts. Defines the practice: make decisions on gut instinct, refuse the spiral, keep moving. The All-In crew took it from there.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE TEST ================= -->
+<section id="test">
+  <div class="wrap">
+    <div class="sec-label">Book IV</div>
+    <h2>The Test <span class="num">//</span> Are You RetardMaxxing or Just Retarded?</h2>
+    <p class="dim">There's a line, brother. On one side: gut instinct, action, zero regrets. On the other: chaos with extra steps. And behind you: the ruminators, still deciding. Six questions. Answer with your gut — if you stop to think, you already failed.</p>
+    <div id="quiz-box"></div>
+  </div>
+</section>
+
+<!-- ================= AFFIRMATION ================= -->
+<section id="affirmation">
+  <div class="wrap">
+    <div class="sec-label">Book V</div>
+    <h2>Daily Affirmation</h2>
+    <div id="affirm-box">
+      <div id="affirm-text">Press the button. Receive the word. Go do the thing.</div>
+      <button class="btn solid" id="affirm-btn" type="button">🔥 Give Me The Word</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONGREGATION (community) ================= -->
+<section id="congregation">
+  <div class="wrap">
+    <div class="sec-label">Book VI</div>
+    <h2>The Congregation</h2>
+    <p class="cong-intro">The wall you throw shit at. No algorithm, no doomscroll — just people telling each other to stop overthinking and go do the thing. Post what you're finally doing. Hype the next brother. Free to join, forever.</p>
+
+    <!-- Not signed in -->
+    <div class="cong-gate" id="congGate">
+      <p>Sign in free to post and cheer people on. Email only — we send you a magic link, you click it, you're in. No password to forget.</p>
+      <button class="btn solid" id="congJoinBtn" type="button">Join The Congregation — Free</button>
+    </div>
+
+    <!-- Signed in -->
+    <div class="cong-composer" id="congComposer" style="display:none;">
+      <textarea id="postBody" maxlength="500" placeholder="What are you finally doing today, brother? Say it out loud so the wall can hear it."></textarea>
+      <div class="row">
+        <span class="count"><span id="postCount">0</span>/500</span>
+        <button class="btn solid" id="postBtn" type="button">Throw It At The Wall</button>
+      </div>
+    </div>
+
+    <div class="feed" id="feed">
+      <div class="feed-empty" id="feedEmpty">Loading the congregation…</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COIN (optional) ================= -->
+<section id="buy">
+  <div class="wrap">
+    <div class="sec-label">Book VII</div>
+    <h2>The Coin <span class="num">//</span> Optional, Obviously</h2>
+    <div class="buy-card">
+      <div class="buy-coin" id="coinName">$RETARD</div>
+      <p class="dim" style="margin-top:10px;max-width:560px;margin-left:auto;margin-right:auto;">
+        There's a community coin. You do <em>not</em> need it to be here — the Bible is free, the Congregation is free, the whole point is free. It exists only if you <em>want</em> a way to plant a flag with the degens. Buy it, don't buy it, your gut already knows.
+      </p>
+      <div class="buy-ca" id="coinCaBox">
+        <span>Contract:</span> <code id="coinCa">coming soon</code>
+        <button class="nav-btn" id="copyCa" type="button" style="padding:4px 10px;font-size:.65rem;display:none;">Copy</button>
+      </div>
+      <div class="buy-actions" id="buyActions">
+        <span class="dim" id="buySoon">Not launched yet — check back, brother.</span>
+      </div>
+      <p class="buy-disclaimer">
+        <strong>THIS IS A MEMECOIN. NOT AN INVESTMENT. NOT FINANCIAL ADVICE.</strong>
+        It has no team promises, no roadmap, no expectation of profit — memecoins routinely go to zero and you can lose every dollar you put in.
+        Only ever spend money you are completely fine setting on fire. If your gut says don't — commandment two — then don't.
+        Do your own research. Nobody here is telling you to buy anything.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-label">Book VIII</div>
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>Is this offensive?</summary>
+      <div class="a">
+        <p>The name? Yeah, it's abrasive — that's not an accident, and we're not going to pretend otherwise. But hear the actual doctrine: the word is only ever pointed at <em>yourself</em> — at your own overthinking, your own spiral, your own seventeen open tabs. It is never, ever pointed at another human being, and it has nothing to do with anyone with a disability. Punching at anyone but your own inner committee is a violation of the whole philosophy.</p>
+        <p>If the name isn't for you, that's a gut feeling, and rule one is to trust it. No hard feelings, brother. The lawn chair will be here.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Is it really free to join?</summary>
+      <div class="a">
+        <p>Yes. Free forever. You give an email, we send a magic link, you click it, you're in the Congregation. No password, no fee, no credit card, no catch. We don't sell anything about you because we barely collect anything about you.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Do I have to buy the coin?</summary>
+      <div class="a">
+        <p>No. Read commandment two. The coin is a flag for the degens who want one — it is completely optional and completely separate from the community, which is free. If your gut says skip it, skip it. Anyone who tells you a memecoin is a sure thing is lying, and that's not this.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What do I actually DO? Like, step one?</summary>
+      <div class="a">
+        <p>Pick the thing you've been "researching" the longest. You know the one. Set a timer for ten minutes and take the first physical action toward it — send the email, buy the domain, make the call, put on the shoes. Then post it in the Congregation so the wall knows you did it.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Where did this come from?</summary>
+      <div class="a">
+        <p>Elisha Long's backyard, via YouTube. Then Marc Andreessen's March 2026 tweet, Jason Calacanis's June thread, the All-In podcast, and a Jeff Giesea Substack essay in between. In under a year it went from one lawn chair to the loudest anti-overthinking movement on the internet. Nobody planned it. Fitting.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="fire">🔥 🚬 🔥</div>
+  <p>THE RETARDMAXXING BIBLE — assembled with zero rumination and zero regrets.</p>
+  <p>Free to join. The coin is optional and is not an investment. Not affiliated with your therapist.</p>
+</footer>
+
+<!-- ================= AUTH MODAL ================= -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <button class="close" id="modalClose" type="button" aria-label="Close">×</button>
+    <h3>Join The Congregation</h3>
+    <p class="sub">Free forever. Enter your email — we send a magic link, you click it, you're in. No password.</p>
+
+    <label for="emailInput">Email</label>
+    <input type="email" id="emailInput" placeholder="you@example.com" autocomplete="email">
+    <button class="btn solid" id="emailBtn" type="button">Send Me The Magic Link</button>
+
+    <!-- Phone 2FA — only shown when CFG.FEATURES.PHONE_2FA is true -->
+    <div class="phone-block" id="phoneBlock">
+      <div class="divider">— or sign in with your phone —</div>
+      <label for="phoneInput">Phone (with country code)</label>
+      <input type="tel" id="phoneInput" placeholder="+15551234567" autocomplete="tel">
+      <button class="btn" id="phoneBtn" type="button">Text Me A Code</button>
+      <div id="otpBlock" style="display:none;">
+        <label for="otpInput" style="margin-top:14px;">Enter the 6-digit code</label>
+        <input type="text" id="otpInput" inputmode="numeric" maxlength="6" placeholder="123456">
+        <button class="btn solid" id="otpBtn" type="button">Verify &amp; Sign In</button>
+      </div>
+    </div>
+
+    <div class="msg" id="authMsg"></div>
+    <p class="fineprint">By joining you agree to be a decent human in the Congregation. We store your email to sign you in and nothing you post is private. That's it.</p>
+  </div>
+</div>
+
+<!-- ================= CONFIG ================= -->
+<script>
+/* ============================================================
+   RETARDMAXXING BIBLE — CONFIG
+   Edit these values, then reload. Nothing else needs touching.
+   ============================================================ */
+window.RMX_CFG = {
+  /* --- Supabase (get these free at https://supabase.com → your project → Settings → API) --- */
+  SUPABASE_URL: "https://ytcbbzohtwxqjcdqlrwj.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_HqhJ3vG680GqQqxrdt7WXw_EUeixUhz",
+
+  /* --- The optional community coin --- */
+  COIN: {
+    NAME: "$RETARD",          // display name — rename to whatever you launch
+    CONTRACT: "",             // paste the Solana mint address AFTER you deploy it. Empty = "coming soon"
+    BUY_URL: "",              // optional custom buy link; if empty it's auto-built from CONTRACT (pump.fun / Jupiter)
+    CHART_URL: ""             // optional custom chart link; if empty it's auto-built from CONTRACT (DexScreener)
+  },
+
+  /* --- Feature flags --- */
+  FEATURES: {
+    PHONE_2FA: false          // leave false until you configure an SMS provider in Supabase (Twilio, costs per text)
+  }
+};
+</script>
+
+<!-- Supabase JS client (runtime service — needs internet) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<!-- ================= APP ================= -->
+<script>
+(function () {
+  "use strict";
+
+  /* ================= THE TEST ================= */
+  var QUESTIONS = [
+    {
+      q: "You've had a business idea for three weeks. What have you done so far?",
+      opts: [
+        { t: "Bought the domain the same night. It's live. It's ugly. It's mine.", k: "max" },
+        { t: "Built a 40-tab spreadsheet of competitors. Planning to plan next week.", k: "rum" },
+        { t: "Quit my job, told everyone, haven't written a single thing down.", k: "wild" }
+      ]
+    },
+    {
+      q: "Your gut says the deal feels wrong. The spreadsheet says it's fine. What do you do?",
+      opts: [
+        { t: "Walk. If it feels wrong, it is. The spreadsheet doesn't know the guy.", k: "max" },
+        { t: "Commission a second spreadsheet to audit the first spreadsheet.", k: "rum" },
+        { t: "Sign it without reading it. Reading is rumination, right?", k: "wild" }
+      ]
+    },
+    {
+      q: "How long does it take you to answer 'where do you want to eat?'",
+      opts: [
+        { t: "Instantly. First place that comes to mind. Never once regretted it.", k: "max" },
+        { t: "45 minutes of reviews, then we get takeout from the usual place anyway.", k: "rum" },
+        { t: "I ordered from three restaurants at once. Sixty dollars in fees.", k: "wild" }
+      ]
+    },
+    {
+      q: "Version one of your project is embarrassing. What now?",
+      opts: [
+        { t: "Ship it. Embarrassment means I'm on schedule.", k: "max" },
+        { t: "Polish it privately for eight more months. Show no one. Ever.", k: "rum" },
+        { t: "What project? I started four new ones this morning.", k: "wild" }
+      ]
+    },
+    {
+      q: "You need to have a hard conversation. Your approach?",
+      opts: [
+        { t: "Say the thing today, plainly, and live with the answer. Zero regrets.", k: "max" },
+        { t: "Draft it in Notes. Revise for two weeks. The moment passes. Relief-ish.", k: "rum" },
+        { t: "Announce it in the group chat at 2am with no context.", k: "wild" }
+      ]
+    },
+    {
+      q: "What's your relationship with your notes app?",
+      opts: [
+        { t: "One list. It says DO THE THING. I mostly do the thing.", k: "max" },
+        { t: "A 4,000-note second brain that has never produced a single action.", k: "rum" },
+        { t: "Notes app? I write on my hand. Then I wash my hands.", k: "wild" }
+      ]
+    }
+  ];
+
+  var VERDICTS = {
+    max: {
+      title: "CERTIFIED RETARDMAXXER 🔥",
+      body: "Gut engaged, brain politely seated, hands moving. You are doing the thing while the panel is still discussing the thing. Zero rumination, zero regrets — the Prophet would offer you a cigar and say nothing, because nothing needs saying. Go build. You were going to anyway."
+    },
+    rum: {
+      title: "TERMINAL RUMINATOR 🧠",
+      body: "Brother, we need to talk. You are the reason this website exists. Your gut has been sending you the correct answer for years and you keep putting it through committee. The good news: the cure is embarrassingly simple, it's ten minutes long, and it's in the FAQ. Close your other seventeen tabs first. Not later. Now."
+    },
+    wild: {
+      title: "JUST RETARDED 🧱",
+      body: "Bold. Fast. Completely unmoored from your own gut. You've confused motion with instinct — the doctrine says trust the gut, and your gut said NO to at least four of the things you did this week. RetardMaxxing isn't chaos, brother; it's obedience to the one advisor who's never wrong. Sit in the lawn chair. Listen. Then move."
+    }
+  };
+
+  var quizBox = document.getElementById("quiz-box");
+  var qIndex = 0;
+  var scores = { max: 0, rum: 0, wild: 0 };
+
+  function esc(s) {
+    var d = document.createElement("div");
+    d.textContent = s == null ? "" : String(s);
+    return d.innerHTML;
+  }
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  function renderQuestion() {
+    var q = QUESTIONS[qIndex];
+    var html = '<div class="q-progress">Question ' + (qIndex + 1) + ' / ' + QUESTIONS.length + '</div>';
+    html += '<div class="q-text">' + esc(q.q) + '</div>';
+    html += '<div class="q-opts">';
+    shuffle(q.opts).forEach(function (o) {
+      html += '<button class="q-opt" type="button" data-k="' + o.k + '">' + esc(o.t) + '</button>';
+    });
+    html += '</div>';
+    quizBox.innerHTML = html;
+
+    Array.prototype.forEach.call(quizBox.querySelectorAll(".q-opt"), function (btn) {
+      btn.addEventListener("click", function () {
+        scores[btn.getAttribute("data-k")]++;
+        qIndex++;
+        if (qIndex < QUESTIONS.length) renderQuestion();
+        else renderVerdict();
+      });
+    });
+  }
+
+  function renderVerdict() {
+    var winner = "max";
+    if (scores.rum > scores[winner]) winner = "rum";
+    if (scores.wild > scores[winner]) winner = "wild";
+    var v = VERDICTS[winner];
+    quizBox.innerHTML =
+      '<div class="verdict-label">The verdict is in</div>' +
+      '<div class="verdict-title">' + esc(v.title) + '</div>' +
+      '<p class="verdict-body">' + esc(v.body) + '</p>' +
+      '<div class="quiz-restart"><button class="btn" type="button" id="quiz-again">Take It Again</button></div>';
+    document.getElementById("quiz-again").addEventListener("click", function () {
+      qIndex = 0;
+      scores = { max: 0, rum: 0, wild: 0 };
+      renderQuestion();
+    });
+  }
+
+  renderQuestion();
+
+  /* ================= AFFIRMATION GENERATOR ================= */
+  var AFFIRMATIONS = [
+    "Trust your gut: if it feels wrong, it is.",
+    "You already know the answer. You knew it in the shower.",
+    "Ship it ugly. Version one is supposed to embarrass you.",
+    "The spreadsheet is stalling. The wall is waiting. Throw.",
+    "Zero rumination. Zero regrets. One lawn chair.",
+    "Nobody is coming to give you permission. Good. It's all yours.",
+    "Your notes app is a graveyard. Today you resurrect exactly one thing.",
+    "Say the thing. The rehearsed version is worse.",
+    "Motion beats meetings. Especially meetings with yourself.",
+    "The analysis was the procrastination all along.",
+    "Wrong is a lesson. Waiting is a loss. Choose the lesson.",
+    "Current status: doing the thing.",
+    "Ten minutes of action beats ten months of research. Timer starts now.",
+    "Be unapologetically, radically, unprofitably yourself.",
+    "Brother, we need to talk: close the other sixteen tabs.",
+    "The grill doesn't overthink the steak. Be the grill."
+  ];
+
+  var affirmBtn = document.getElementById("affirm-btn");
+  var affirmText = document.getElementById("affirm-text");
+  var lastAffirm = -1;
+
+  affirmBtn.addEventListener("click", function () {
+    var i;
+    do { i = Math.floor(Math.random() * AFFIRMATIONS.length); } while (i === lastAffirm);
+    lastAffirm = i;
+    affirmText.textContent = "“" + AFFIRMATIONS[i] + "”";
+  });
+
+  /* ================= COIN WIDGET ================= */
+  var CFG = window.RMX_CFG || {};
+  var COIN = CFG.COIN || {};
+  (function initCoin() {
+    document.getElementById("coinName").textContent = COIN.NAME || "$RETARD";
+    var ca = (COIN.CONTRACT || "").trim();
+    var actions = document.getElementById("buyActions");
+    var caEl = document.getElementById("coinCa");
+    var copyBtn = document.getElementById("copyCa");
+    if (!ca) return; // "coming soon" stays
+    caEl.textContent = ca;
+    copyBtn.style.display = "";
+    copyBtn.addEventListener("click", function () {
+      navigator.clipboard && navigator.clipboard.writeText(ca).then(function () {
+        copyBtn.textContent = "Copied"; setTimeout(function () { copyBtn.textContent = "Copy"; }, 1500);
+      });
+    });
+    var buyUrl = (COIN.BUY_URL || "").trim() || ("https://jup.ag/swap/SOL-" + ca);
+    var pumpUrl = "https://pump.fun/coin/" + ca;
+    var chartUrl = (COIN.CHART_URL || "").trim() || ("https://dexscreener.com/solana/" + ca);
+    actions.innerHTML =
+      '<a class="btn solid" href="' + esc(buyUrl) + '" target="_blank" rel="noopener">Buy on Jupiter</a>' +
+      '<a class="btn" href="' + esc(pumpUrl) + '" target="_blank" rel="noopener">pump.fun</a>' +
+      '<a class="btn" href="' + esc(chartUrl) + '" target="_blank" rel="noopener">Chart</a>';
+  })();
+
+  /* ================= SUPABASE / AUTH / CONGREGATION ================= */
+  var authMsg = document.getElementById("authMsg");
+  var modal = document.getElementById("authModal");
+
+  function setMsg(text, kind) {
+    authMsg.textContent = text || "";
+    authMsg.className = "msg" + (kind ? " " + kind : "");
+  }
+  function openModal() { modal.classList.add("open"); setMsg("", ""); var e = document.getElementById("emailInput"); if (e) setTimeout(function(){ e.focus(); }, 50); }
+  function closeModal() { modal.classList.remove("open"); }
+
+  document.getElementById("navSignIn").addEventListener("click", openModal);
+  document.getElementById("congJoinBtn").addEventListener("click", openModal);
+  document.getElementById("modalClose").addEventListener("click", closeModal);
+  modal.addEventListener("click", function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
+
+  // Show phone block only if enabled
+  if (CFG.FEATURES && CFG.FEATURES.PHONE_2FA) {
+    document.getElementById("phoneBlock").classList.add("show");
+  }
+
+  // Is Supabase actually configured?
+  var configured = CFG.SUPABASE_URL && CFG.SUPABASE_ANON_KEY &&
+    CFG.SUPABASE_URL.indexOf("YOUR-PROJECT") === -1 &&
+    CFG.SUPABASE_ANON_KEY.indexOf("YOUR-ANON") === -1;
+
+  var feed = document.getElementById("feed");
+  var feedEmpty = document.getElementById("feedEmpty");
+  var composer = document.getElementById("congComposer");
+  var gate = document.getElementById("congGate");
+  var authSlot = document.getElementById("authSlot");
+
+  if (!configured || !window.supabase) {
+    // Preview mode — site fully browsable, community shows a friendly notice.
+    feedEmpty.innerHTML = "The Congregation goes live the moment Supabase is connected " +
+      "(see IMPLEMENT sheet). Everything else on this page already works.";
+    var b = document.getElementById("congJoinBtn");
+    b.textContent = "Backend not connected yet";
+    b.disabled = true;
+    return;
+  }
+
+  var sb = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY);
+  var currentUser = null;
+  var myHandle = null;
+  var myLikes = {}; // postId -> true
+
+  var redirectTo = window.location.origin + window.location.pathname;
+
+  /* ---- email magic link ---- */
+  document.getElementById("emailBtn").addEventListener("click", function () {
+    var email = document.getElementById("emailInput").value.trim();
+    if (!email || email.indexOf("@") === -1) { setMsg("Enter a real email, brother.", "err"); return; }
+    setMsg("Sending…", "");
+    sb.auth.signInWithOtp({ email: email, options: { emailRedirectTo: redirectTo } })
+      .then(function (r) {
+        if (r.error) setMsg(r.error.message, "err");
+        else setMsg("Check your email — click the link and you're in. (Check spam too.)", "ok");
+      })
+      .catch(function (e) { setMsg(String(e), "err"); });
+  });
+
+  /* ---- phone OTP (only when enabled) ---- */
+  var phoneBtn = document.getElementById("phoneBtn");
+  if (phoneBtn) {
+    phoneBtn.addEventListener("click", function () {
+      var phone = document.getElementById("phoneInput").value.trim();
+      if (!phone) { setMsg("Enter your phone with country code, e.g. +15551234567.", "err"); return; }
+      setMsg("Texting you a code…", "");
+      sb.auth.signInWithOtp({ phone: phone }).then(function (r) {
+        if (r.error) setMsg(r.error.message, "err");
+        else { document.getElementById("otpBlock").style.display = "block"; setMsg("Code sent. Enter it below.", "ok"); }
+      }).catch(function (e) { setMsg(String(e), "err"); });
+    });
+    document.getElementById("otpBtn").addEventListener("click", function () {
+      var phone = document.getElementById("phoneInput").value.trim();
+      var token = document.getElementById("otpInput").value.trim();
+      setMsg("Verifying…", "");
+      sb.auth.verifyOtp({ phone: phone, token: token, type: "sms" }).then(function (r) {
+        if (r.error) setMsg(r.error.message, "err");
+        else { setMsg("You're in.", "ok"); closeModal(); }
+      }).catch(function (e) { setMsg(String(e), "err"); });
+    });
+  }
+
+  /* ---- session handling ---- */
+  function renderAuthState() {
+    if (currentUser) {
+      var name = myHandle || "brother";
+      authSlot.innerHTML =
+        '<span class="nav-handle">🔥 <span class="dim">@</span>' + esc(name) + '</span>' +
+        '<button class="nav-btn" id="navSignOut" type="button">Sign Out</button>';
+      document.getElementById("navSignOut").addEventListener("click", function () {
+        sb.auth.signOut();
+      });
+      gate.style.display = "none";
+      composer.style.display = "";
+    } else {
+      authSlot.innerHTML = '<button class="nav-btn" id="navSignIn2" type="button">Sign In</button>';
+      document.getElementById("navSignIn2").addEventListener("click", openModal);
+      gate.style.display = "";
+      composer.style.display = "none";
+    }
+  }
+
+  function loadProfile() {
+    if (!currentUser) { myHandle = null; return Promise.resolve(); }
+    return sb.from("profiles").select("handle").eq("id", currentUser.id).single()
+      .then(function (r) { myHandle = (r.data && r.data.handle) || null; })
+      .catch(function () { myHandle = null; });
+  }
+
+  function loadMyLikes() {
+    myLikes = {};
+    if (!currentUser) return Promise.resolve();
+    return sb.from("likes").select("post_id").eq("user_id", currentUser.id)
+      .then(function (r) { (r.data || []).forEach(function (row) { myLikes[row.post_id] = true; }); })
+      .catch(function () {});
+  }
+
+  function timeAgo(iso) {
+    var then = new Date(iso).getTime();
+    var s = Math.max(1, Math.floor((Date.now() - then) / 1000));
+    if (s < 60) return s + "s ago";
+    var m = Math.floor(s / 60); if (m < 60) return m + "m ago";
+    var h = Math.floor(m / 60); if (h < 24) return h + "h ago";
+    var d = Math.floor(h / 24); if (d < 30) return d + "d ago";
+    return new Date(iso).toLocaleDateString();
+  }
+
+  function renderFeed(rows) {
+    if (!rows || !rows.length) {
+      feed.innerHTML = '<div class="feed-empty">Nobody\'s thrown anything at the wall yet. Be the first, brother.</div>';
+      return;
+    }
+    feed.innerHTML = rows.map(function (p) {
+      var liked = myLikes[p.id] ? " liked" : "";
+      var likes = p.like_count || 0;
+      return '<div class="post" data-id="' + p.id + '">' +
+        '<div class="meta"><span class="who">@' + esc(p.handle || "brother") + '</span>' +
+        '<span class="when">' + esc(timeAgo(p.created_at)) + '</span></div>' +
+        '<div class="body">' + esc(p.body) + '</div>' +
+        '<div class="actions">' +
+          '<button class="like-btn' + liked + '" data-id="' + p.id + '" type="button">🔥 <span class="lc">' + likes + '</span></button>' +
+        '</div>' +
+      '</div>';
+    }).join("");
+
+    Array.prototype.forEach.call(feed.querySelectorAll(".like-btn"), function (btn) {
+      btn.addEventListener("click", function () { toggleLike(btn); });
+    });
+  }
+
+  function loadFeed() {
+    return sb.from("feed").select("*").order("created_at", { ascending: false }).limit(100)
+      .then(function (r) {
+        if (r.error) { feed.innerHTML = '<div class="feed-empty">' + esc(r.error.message) + '</div>'; return; }
+        renderFeed(r.data);
+      })
+      .catch(function (e) { feed.innerHTML = '<div class="feed-empty">' + esc(String(e)) + '</div>'; });
+  }
+
+  function toggleLike(btn) {
+    if (!currentUser) { openModal(); return; }
+    var id = btn.getAttribute("data-id");
+    var lc = btn.querySelector(".lc");
+    var count = parseInt(lc.textContent, 10) || 0;
+    if (myLikes[id]) {
+      myLikes[id] = false; delete myLikes[id];
+      btn.classList.remove("liked"); lc.textContent = Math.max(0, count - 1);
+      sb.from("likes").delete().eq("post_id", id).eq("user_id", currentUser.id);
+    } else {
+      myLikes[id] = true;
+      btn.classList.add("liked"); lc.textContent = count + 1;
+      sb.from("likes").insert({ post_id: id, user_id: currentUser.id });
+    }
+  }
+
+  /* ---- composer ---- */
+  var postBody = document.getElementById("postBody");
+  var postCount = document.getElementById("postCount");
+  postBody.addEventListener("input", function () { postCount.textContent = postBody.value.length; });
+
+  document.getElementById("postBtn").addEventListener("click", function () {
+    if (!currentUser) { openModal(); return; }
+    var body = postBody.value.trim();
+    if (!body) return;
+    var btn = this; btn.disabled = true;
+    sb.from("posts").insert({ user_id: currentUser.id, body: body }).select().single()
+      .then(function (r) {
+        btn.disabled = false;
+        if (r.error) { alert(r.error.message); return; }
+        postBody.value = ""; postCount.textContent = "0";
+        loadFeed();
+      })
+      .catch(function (e) { btn.disabled = false; alert(String(e)); });
+  });
+
+  /* ---- boot ---- */
+  function applySession(session) {
+    currentUser = session && session.user ? session.user : null;
+    loadProfile().then(loadMyLikes).then(function () {
+      renderAuthState();
+      loadFeed();
+    });
+  }
+
+  sb.auth.getSession().then(function (r) {
+    applySession(r.data ? r.data.session : null);
+  });
+
+  sb.auth.onAuthStateChange(function (_event, session) {
+    if (session && session.user) closeModal();
+    applySession(session);
+  });
+
+  /* ---- LIVE board: everyone sees new posts/likes instantly (Supabase Realtime) ---- */
+  var reloadTimer = null;
+  function scheduleReload() { clearTimeout(reloadTimer); reloadTimer = setTimeout(loadFeed, 350); }
+  sb.channel("congregation")
+    .on("postgres_changes", { event: "*", schema: "public", table: "posts" }, scheduleReload)
+    .on("postgres_changes", { event: "*", schema: "public", table: "likes" }, scheduleReload)
+    .subscribe();
+
+  /* safety net in case realtime drops: light refresh every 30s */
+  setInterval(loadFeed, 30000);
+})();
+</script>
+</body>
+</html>
