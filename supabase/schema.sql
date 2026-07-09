@@ -112,4 +112,94 @@ begin
   end if;
 end $$;
 
--- Done. The Congregation is open.
+-- ============================================================
+--  THE FORUM — threaded discussion board (topics -> threads -> replies)
+-- ============================================================
+create table if not exists public.threads (
+  id          bigint generated always as identity primary key,
+  user_id     uuid not null references auth.users(id) on delete cascade,
+  category    text not null default 'General',
+  title       text not null check (char_length(title) between 1 and 120),
+  body        text not null check (char_length(body) between 1 and 4000),
+  created_at  timestamptz not null default now(),
+  bumped_at   timestamptz not null default now()
+);
+create index if not exists threads_bumped_idx on public.threads (bumped_at desc);
+
+create table if not exists public.replies (
+  id          bigint generated always as identity primary key,
+  thread_id   bigint not null references public.threads(id) on delete cascade,
+  user_id     uuid not null references auth.users(id) on delete cascade,
+  body        text not null check (char_length(body) between 1 and 4000),
+  created_at  timestamptz not null default now()
+);
+create index if not exists replies_thread_idx on public.replies (thread_id, created_at);
+
+-- bump a thread to the top whenever it gets a reply
+create or replace function public.bump_thread()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  update public.threads set bumped_at = now() where id = new.thread_id;
+  return new;
+end; $$;
+drop trigger if exists on_reply_bump on public.replies;
+create trigger on_reply_bump after insert on public.replies
+  for each row execute function public.bump_thread();
+
+-- thread list with author handle + reply count
+create or replace view public.thread_list
+with (security_invoker = true) as
+select t.id, t.category, t.title, t.created_at, t.bumped_at,
+       pr.handle as author,
+       coalesce(r.cnt, 0) as reply_count
+from public.threads t
+left join public.profiles pr on pr.id = t.user_id
+left join (select thread_id, count(*)::int as cnt from public.replies group by thread_id) r
+       on r.thread_id = t.id;
+
+-- replies with author handle
+create or replace view public.reply_list
+with (security_invoker = true) as
+select r.id, r.thread_id, r.body, r.created_at, pr.handle as author
+from public.replies r
+left join public.profiles pr on pr.id = r.user_id;
+
+alter table public.threads enable row level security;
+alter table public.replies enable row level security;
+
+drop policy if exists threads_read   on public.threads;
+drop policy if exists threads_insert on public.threads;
+drop policy if exists threads_delete on public.threads;
+create policy threads_read   on public.threads for select using (true);
+create policy threads_insert on public.threads for insert with check (auth.uid() = user_id);
+create policy threads_delete on public.threads for delete using (auth.uid() = user_id);
+
+drop policy if exists replies_read   on public.replies;
+drop policy if exists replies_insert on public.replies;
+drop policy if exists replies_delete on public.replies;
+create policy replies_read   on public.replies for select using (true);
+create policy replies_insert on public.replies for insert with check (auth.uid() = user_id);
+create policy replies_delete on public.replies for delete using (auth.uid() = user_id);
+
+-- make the forum live too
+do $$
+begin
+  if not exists (select 1 from pg_publication_tables
+                 where pubname='supabase_realtime' and schemaname='public' and tablename='threads') then
+    alter publication supabase_realtime add table public.threads;
+  end if;
+  if not exists (select 1 from pg_publication_tables
+                 where pubname='supabase_realtime' and schemaname='public' and tablename='replies') then
+    alter publication supabase_realtime add table public.replies;
+  end if;
+end $$;
+
+-- ============================================================
+--  HANDLE RULES — enforce clean, unique tag names people pick
+-- ============================================================
+-- lowercase, 3-20 chars, letters/numbers/underscore only
+alter table public.profiles drop constraint if exists handle_format;
+alter table public.profiles add constraint handle_format
+  check (handle ~ '^[a-z0-9_]{3,20}$');
+
+-- Done. The Congregation and the Forum are open.

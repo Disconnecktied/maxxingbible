@@ -307,6 +307,61 @@
   .modal .phone-block.show { display: block; }
   .modal .fineprint { color: var(--dim); font-size: .68rem; margin-top: 20px; line-height: 1.6; }
 
+  /* ---------- FORUM ---------- */
+  #forum .forum-intro { color: var(--dim); margin-bottom: 22px; max-width: 640px; }
+  .cats { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .cat {
+    padding: 7px 14px; border: 1px solid var(--line); background: var(--bg2);
+    color: var(--dim); font-family: var(--mono); font-size: .74rem; cursor: pointer;
+    text-transform: uppercase; letter-spacing: .08em; transition: all .12s;
+  }
+  .cat:hover { border-color: var(--amber); color: var(--amber); }
+  .cat.active { background: var(--orange); color: #000; border-color: var(--orange); }
+  .forum-actions { margin-bottom: 20px; }
+  .thread-list { display: flex; flex-direction: column; gap: 12px; }
+  .thread-row {
+    background: var(--panel); border: 1px solid var(--line); padding: 16px 18px;
+    cursor: pointer; transition: border-color .12s;
+  }
+  .thread-row:hover { border-color: var(--orange); }
+  .thread-row .t-title { color: var(--amber); font-size: 1rem; margin-bottom: 6px; }
+  .thread-row .t-meta { color: var(--dim); font-size: .74rem; display: flex; gap: 12px; flex-wrap: wrap; }
+  .t-cat { color: var(--ember); text-transform: uppercase; letter-spacing: .08em; }
+  .thread-detail { display: none; }
+  .thread-detail.open { display: block; }
+  .back-btn {
+    background: none; border: none; color: var(--dim); cursor: pointer; font-family: var(--mono);
+    font-size: .8rem; margin-bottom: 18px; padding: 0;
+  }
+  .back-btn:hover { color: var(--amber); }
+  .op-post {
+    background: var(--panel); border: 1px solid var(--orange); padding: 22px 20px; margin-bottom: 6px;
+  }
+  .op-post h3 { color: var(--amber); font-size: 1.3rem; margin-bottom: 10px; line-height: 1.2; }
+  .op-post .op-body { color: var(--text); white-space: pre-wrap; word-break: break-word; }
+  .reply {
+    background: var(--panel); border: 1px solid var(--line);
+    border-left: 2px solid var(--line); padding: 14px 18px; margin-top: 10px;
+  }
+  .reply .meta { display: flex; gap: 10px; align-items: baseline; margin-bottom: 6px; flex-wrap: wrap; }
+  .reply .who { color: var(--amber); font-size: .82rem; font-weight: 700; }
+  .reply .when { color: var(--dim); font-size: .7rem; }
+  .reply .body { color: var(--text); font-size: .92rem; white-space: pre-wrap; word-break: break-word; }
+  .reply-box, .new-thread { background: var(--panel); border: 1px solid var(--line); padding: 18px; margin-top: 18px; }
+  .new-thread input, .new-thread select, .reply-box textarea, .new-thread textarea {
+    width: 100%; background: var(--bg2); border: 1px solid var(--line); color: var(--text);
+    font-family: var(--mono); font-size: .92rem; padding: 12px; margin-bottom: 12px;
+  }
+  .new-thread textarea, .reply-box textarea { min-height: 90px; resize: vertical; }
+  .new-thread input:focus, .new-thread textarea:focus, .new-thread select:focus, .reply-box textarea:focus { outline: none; border-color: var(--orange); }
+
+  /* ---------- PROFILE ---------- */
+  nav .nav-handle { background: none; border: none; cursor: pointer; font-family: var(--mono); }
+  nav .nav-handle:hover { color: var(--orange); }
+  .profile-id { color: var(--amber); font-size: 1.1rem; margin-bottom: 4px; }
+  .profile-hint { color: var(--dim); font-size: .76rem; margin-bottom: 20px; }
+  #profileModal .preview { color: var(--ember); font-size: .8rem; margin: -8px 0 16px; min-height: 1em; }
+
   @media (max-width: 560px) {
     nav .links { display: none; }
     nav .auth-slot { margin-left: auto; }
@@ -326,6 +381,7 @@
       <a href="#commandments">Commandments</a>
       <a href="#test">The Test</a>
       <a href="#congregation">Congregation</a>
+      <a href="#forum">Forum</a>
       <a href="#buy">Coin</a>
       <a href="#faq">FAQ</a>
       <div class="auth-slot" id="authSlot">
@@ -463,10 +519,41 @@
   </div>
 </section>
 
+<!-- ================= FORUM (discussion board) ================= -->
+<section id="forum">
+  <div class="wrap">
+    <div class="sec-label">Book VII</div>
+    <h2>The Forum</h2>
+    <p class="forum-intro">Longer than a wall post. Start a thread, argue it out, talk each other off the ledge of overthinking. Pick a room.</p>
+
+    <div class="cats" id="cats"></div>
+
+    <div class="forum-actions" id="forumActions">
+      <button class="btn solid" id="newThreadBtn" type="button">＋ Start a Thread</button>
+    </div>
+
+    <div class="new-thread" id="newThreadBox" style="display:none;">
+      <select id="ntCategory"></select>
+      <input type="text" id="ntTitle" maxlength="120" placeholder="Thread title — say it straight.">
+      <textarea id="ntBody" maxlength="4000" placeholder="What's the topic, brother?"></textarea>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn solid" id="ntPost" type="button">Post Thread</button>
+        <button class="btn" id="ntCancel" type="button">Cancel</button>
+      </div>
+    </div>
+
+    <div class="thread-list" id="threadList">
+      <div class="feed-empty">Loading the forum…</div>
+    </div>
+
+    <div class="thread-detail" id="threadDetail"></div>
+  </div>
+</section>
+
 <!-- ================= COIN (optional) ================= -->
 <section id="buy">
   <div class="wrap">
-    <div class="sec-label">Book VII</div>
+    <div class="sec-label">Book VIII</div>
     <h2>The Coin <span class="num">//</span> Optional, Obviously</h2>
     <div class="buy-card">
       <div class="buy-coin" id="coinName">$RETARD</div>
@@ -493,7 +580,7 @@
 <!-- ================= FAQ ================= -->
 <section id="faq">
   <div class="wrap">
-    <div class="sec-label">Book VIII</div>
+    <div class="sec-label">Book IX</div>
     <h2>Frequently Asked Questions</h2>
 
     <details>
@@ -569,6 +656,22 @@
   </div>
 </div>
 
+<!-- ================= PROFILE MODAL ================= -->
+<div class="modal-overlay" id="profileModal">
+  <div class="modal">
+    <button class="close" id="profileClose" type="button" aria-label="Close">×</button>
+    <h3>Your Tag</h3>
+    <p class="sub">This is your name across the whole community. Pick something.</p>
+    <div class="profile-id" id="profileCurrent">you@Rmaxxing</div>
+    <p class="profile-hint">3–20 characters · lowercase letters, numbers, underscore.</p>
+    <label for="handleInput">New tag</label>
+    <input type="text" id="handleInput" maxlength="20" placeholder="glitch" autocomplete="off">
+    <div class="preview" id="handlePreview"></div>
+    <button class="btn solid" id="handleSave" type="button">Save Tag</button>
+    <div class="msg" id="profileMsg"></div>
+  </div>
+</div>
+
 <!-- ================= CONFIG ================= -->
 <script>
 /* ============================================================
@@ -587,6 +690,9 @@ window.RMX_CFG = {
     BUY_URL: "",              // optional custom buy link; if empty it's auto-built from CONTRACT (pump.fun / Jupiter)
     CHART_URL: ""             // optional custom chart link; if empty it's auto-built from CONTRACT (DexScreener)
   },
+
+  /* --- Community identity --- */
+  TAG_SUFFIX: "Rmaxxing",     // members are shown as  handle@Rmaxxing  (cosmetic tag, not a real email)
 
   /* --- Feature flags --- */
   FEATURES: {
@@ -834,6 +940,9 @@ window.RMX_CFG = {
   var myHandle = null;
   var myLikes = {}; // postId -> true
 
+  var TAG_SUFFIX = CFG.TAG_SUFFIX || "Rmaxxing";
+  function identity(h) { return (h || "brother") + "@" + TAG_SUFFIX; }
+
   var redirectTo = window.location.origin + window.location.pathname;
 
   /* ---- email magic link ---- */
@@ -877,11 +986,12 @@ window.RMX_CFG = {
     if (currentUser) {
       var name = myHandle || "brother";
       authSlot.innerHTML =
-        '<span class="nav-handle">🔥 <span class="dim">@</span>' + esc(name) + '</span>' +
+        '<button class="nav-handle" id="navProfile" type="button" title="Edit your tag">🔥 ' + esc(identity(name)) + '</button>' +
         '<button class="nav-btn" id="navSignOut" type="button">Sign Out</button>';
       document.getElementById("navSignOut").addEventListener("click", function () {
         sb.auth.signOut();
       });
+      document.getElementById("navProfile").addEventListener("click", openProfile);
       gate.style.display = "none";
       composer.style.display = "";
     } else {
@@ -926,7 +1036,7 @@ window.RMX_CFG = {
       var liked = myLikes[p.id] ? " liked" : "";
       var likes = p.like_count || 0;
       return '<div class="post" data-id="' + p.id + '">' +
-        '<div class="meta"><span class="who">@' + esc(p.handle || "brother") + '</span>' +
+        '<div class="meta"><span class="who">' + esc(identity(p.handle || "brother")) + '</span>' +
         '<span class="when">' + esc(timeAgo(p.created_at)) + '</span></div>' +
         '<div class="body">' + esc(p.body) + '</div>' +
         '<div class="actions">' +
@@ -991,6 +1101,7 @@ window.RMX_CFG = {
     loadProfile().then(loadMyLikes).then(function () {
       renderAuthState();
       loadFeed();
+      if (currentThread) openThread(currentThread); else loadThreads();
     });
   }
 
@@ -1013,6 +1124,211 @@ window.RMX_CFG = {
 
   /* safety net in case realtime drops: light refresh every 30s */
   setInterval(loadFeed, 30000);
+
+  /* ================= PROFILE / TAG EDITING ================= */
+  var profileModal = document.getElementById("profileModal");
+  var handleInput = document.getElementById("handleInput");
+  var handlePreview = document.getElementById("handlePreview");
+  var profileMsg = document.getElementById("profileMsg");
+
+  function openProfile() {
+    if (!currentUser) { openModal(); return; }
+    document.getElementById("profileCurrent").textContent = identity(myHandle);
+    handleInput.value = (myHandle && myHandle.indexOf("retard_") === 0) ? "" : (myHandle || "");
+    handlePreview.textContent = "";
+    profileMsg.textContent = ""; profileMsg.className = "msg";
+    profileModal.classList.add("open");
+    setTimeout(function () { handleInput.focus(); }, 50);
+  }
+  function closeProfile() { profileModal.classList.remove("open"); }
+  document.getElementById("profileClose").addEventListener("click", closeProfile);
+  profileModal.addEventListener("click", function (e) { if (e.target === profileModal) closeProfile(); });
+  handleInput.addEventListener("input", function () {
+    var v = handleInput.value.toLowerCase().replace(/[^a-z0-9_]/g, "");
+    handleInput.value = v;
+    handlePreview.textContent = v ? identity(v) : "";
+  });
+  document.getElementById("handleSave").addEventListener("click", function () {
+    var v = handleInput.value.trim().toLowerCase();
+    if (!/^[a-z0-9_]{3,20}$/.test(v)) {
+      profileMsg.textContent = "3–20 chars: lowercase letters, numbers, underscore only.";
+      profileMsg.className = "msg err"; return;
+    }
+    profileMsg.textContent = "Saving…"; profileMsg.className = "msg";
+    sb.from("profiles").update({ handle: v }).eq("id", currentUser.id).select().single()
+      .then(function (r) {
+        if (r.error) {
+          var taken = r.error.code === "23505" || /duplicate|unique/i.test(r.error.message || "");
+          profileMsg.textContent = taken ? "That tag's taken, brother. Pick another." : r.error.message;
+          profileMsg.className = "msg err"; return;
+        }
+        myHandle = v;
+        profileMsg.textContent = "Saved. You're " + identity(v) + ".";
+        profileMsg.className = "msg ok";
+        renderAuthState(); loadFeed();
+        if (currentThread) openThread(currentThread); else loadThreads();
+        setTimeout(closeProfile, 900);
+      })
+      .catch(function (e) { profileMsg.textContent = String(e); profileMsg.className = "msg err"; });
+  });
+
+  /* ================= FORUM ================= */
+  var CATEGORIES = ["General", "Wins", "Gut Checks", "Rants", "Introductions"];
+  var activeCat = "All";
+  var currentThread = null;
+  var threadListEl = document.getElementById("threadList");
+  var threadDetailEl = document.getElementById("threadDetail");
+  var catsEl = document.getElementById("cats");
+  var forumActions = document.getElementById("forumActions");
+  var newThreadBox = document.getElementById("newThreadBox");
+  var ntCategory = document.getElementById("ntCategory");
+
+  ["All"].concat(CATEGORIES).forEach(function (c) {
+    var b = document.createElement("button");
+    b.className = "cat" + (c === "All" ? " active" : "");
+    b.textContent = c;
+    b.addEventListener("click", function () {
+      activeCat = c;
+      Array.prototype.forEach.call(catsEl.children, function (x) { x.classList.toggle("active", x === b); });
+      loadThreads();
+    });
+    catsEl.appendChild(b);
+  });
+  CATEGORIES.forEach(function (c) {
+    var o = document.createElement("option"); o.value = c; o.textContent = c; ntCategory.appendChild(o);
+  });
+
+  document.getElementById("newThreadBtn").addEventListener("click", function () {
+    if (!currentUser) { openModal(); return; }
+    newThreadBox.style.display = (newThreadBox.style.display === "none") ? "" : "none";
+  });
+  document.getElementById("ntCancel").addEventListener("click", function () { newThreadBox.style.display = "none"; });
+  document.getElementById("ntPost").addEventListener("click", function () {
+    if (!currentUser) { openModal(); return; }
+    var title = document.getElementById("ntTitle").value.trim();
+    var body = document.getElementById("ntBody").value.trim();
+    if (!title || !body) return;
+    var btn = this; btn.disabled = true;
+    sb.from("threads").insert({ user_id: currentUser.id, title: title, body: body, category: ntCategory.value })
+      .select().single()
+      .then(function (r) {
+        btn.disabled = false;
+        if (r.error) { alert(r.error.message); return; }
+        document.getElementById("ntTitle").value = ""; document.getElementById("ntBody").value = "";
+        newThreadBox.style.display = "none";
+        openThread(r.data.id);
+      })
+      .catch(function (e) { btn.disabled = false; alert(String(e)); });
+  });
+
+  function renderThreadList(rows) {
+    if (!rows || !rows.length) {
+      threadListEl.innerHTML = '<div class="feed-empty">No threads in this room yet. Start one, brother.</div>';
+      return;
+    }
+    threadListEl.innerHTML = rows.map(function (t) {
+      var n = t.reply_count || 0;
+      return '<div class="thread-row" data-id="' + t.id + '">' +
+        '<div class="t-title">' + esc(t.title) + '</div>' +
+        '<div class="t-meta"><span class="t-cat">' + esc(t.category) + '</span>' +
+        '<span>' + esc(identity(t.author || "brother")) + '</span>' +
+        '<span>' + n + ' repl' + (n === 1 ? 'y' : 'ies') + '</span>' +
+        '<span>' + esc(timeAgo(t.bumped_at)) + '</span></div></div>';
+    }).join("");
+    Array.prototype.forEach.call(threadListEl.querySelectorAll(".thread-row"), function (row) {
+      row.addEventListener("click", function () { openThread(row.getAttribute("data-id")); });
+    });
+  }
+
+  function loadThreads() {
+    currentThread = null;
+    threadDetailEl.classList.remove("open"); threadDetailEl.innerHTML = "";
+    threadListEl.style.display = ""; forumActions.style.display = ""; catsEl.style.display = "";
+    var q = sb.from("thread_list").select("*").order("bumped_at", { ascending: false }).limit(100);
+    if (activeCat !== "All") q = q.eq("category", activeCat);
+    return q.then(function (r) {
+      if (r.error) { threadListEl.innerHTML = '<div class="feed-empty">' + esc(r.error.message) + '</div>'; return; }
+      renderThreadList(r.data);
+    }).catch(function (e) { threadListEl.innerHTML = '<div class="feed-empty">' + esc(String(e)) + '</div>'; });
+  }
+
+  function wireBack() {
+    var b = document.getElementById("backBtn");
+    if (b) b.addEventListener("click", function () {
+      history.replaceState(null, "", location.pathname + location.search);
+      loadThreads();
+    });
+  }
+
+  function openThread(id) {
+    currentThread = id;
+    if (location.hash !== "#thread=" + id) history.replaceState(null, "", "#thread=" + id);
+    threadListEl.style.display = "none"; forumActions.style.display = "none";
+    catsEl.style.display = "none"; newThreadBox.style.display = "none";
+    threadDetailEl.classList.add("open");
+    threadDetailEl.innerHTML = '<div class="feed-empty">Loading thread…</div>';
+    Promise.all([
+      sb.from("thread_list").select("*").eq("id", id).single(),
+      sb.from("reply_list").select("*").eq("thread_id", id).order("created_at", { ascending: true }),
+      sb.from("threads").select("body").eq("id", id).single()
+    ]).then(function (res) {
+      var t = res[0].data, replies = res[1].data || [], full = res[2].data;
+      if (!t) { threadDetailEl.innerHTML = '<button class="back-btn" id="backBtn">← back</button><div class="feed-empty">Thread not found.</div>'; wireBack(); return; }
+      var html = '<button class="back-btn" id="backBtn">← back to the forum</button>';
+      html += '<div class="op-post"><h3>' + esc(t.title) + '</h3>' +
+        '<div class="t-meta" style="margin-bottom:12px;"><span class="t-cat">' + esc(t.category) + '</span>' +
+        '<span>' + esc(identity(t.author || "brother")) + '</span>' +
+        '<span>' + esc(timeAgo(t.created_at)) + '</span></div>' +
+        '<div class="op-body">' + esc(full ? full.body : "") + '</div></div>';
+      html += replies.map(function (rp) {
+        return '<div class="reply"><div class="meta"><span class="who">' + esc(identity(rp.author || "brother")) +
+          '</span><span class="when">' + esc(timeAgo(rp.created_at)) + '</span></div>' +
+          '<div class="body">' + esc(rp.body) + '</div></div>';
+      }).join("");
+      if (currentUser) {
+        html += '<div class="reply-box"><textarea id="replyBody" maxlength="4000" placeholder="Add your two cents, brother…"></textarea>' +
+          '<button class="btn solid" id="replyPost" type="button">Reply</button></div>';
+      } else {
+        html += '<div class="reply-box" style="text-align:center;"><p class="dim" style="margin-bottom:12px;">Sign in free to reply.</p>' +
+          '<button class="btn solid" id="replySignin" type="button">Join Free</button></div>';
+      }
+      threadDetailEl.innerHTML = html;
+      wireBack();
+      if (currentUser) {
+        document.getElementById("replyPost").addEventListener("click", function () {
+          var body = document.getElementById("replyBody").value.trim();
+          if (!body) return;
+          var btn = this; btn.disabled = true;
+          sb.from("replies").insert({ thread_id: id, user_id: currentUser.id, body: body }).then(function (r) {
+            btn.disabled = false;
+            if (r.error) { alert(r.error.message); return; }
+            openThread(id);
+          }).catch(function (e) { btn.disabled = false; alert(String(e)); });
+        });
+      } else {
+        document.getElementById("replySignin").addEventListener("click", openModal);
+      }
+    }).catch(function (e) {
+      threadDetailEl.innerHTML = '<button class="back-btn" id="backBtn">← back</button><div class="feed-empty">' + esc(String(e)) + '</div>';
+      wireBack();
+    });
+  }
+
+  function routeForum() {
+    var m = /#thread=(\d+)/.exec(location.hash);
+    if (m) openThread(m[1]); else loadThreads();
+  }
+  window.addEventListener("hashchange", routeForum);
+
+  sb.channel("forum")
+    .on("postgres_changes", { event: "*", schema: "public", table: "threads" }, function () { if (!currentThread) loadThreads(); })
+    .on("postgres_changes", { event: "*", schema: "public", table: "replies" }, function (p) {
+      if (currentThread && p && p.new && String(p.new.thread_id) === String(currentThread)) openThread(currentThread);
+      else if (!currentThread) loadThreads();
+    })
+    .subscribe();
+
+  routeForum();
 })();
 </script>
 </body>
